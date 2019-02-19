@@ -4,7 +4,7 @@
       <h2>Featured Items</h2>
       <ul class="featured-items">
         <li v-for="product in products" :key="product.id" class="featured-items__item">
-          <router-link :to="{ name: 'product', params: { id: product.id}}">
+          <router-link :to="{ name: 'product', params: { id: product.id }}">
             <img class="product-image" :src="imagePath(product)" alt>
             <p class="product-title">{{ product.name }}</p>
             <p>
@@ -64,5 +64,9 @@ export default {
 }
 .product-title {
   font-weight: bold;
+}
+a {
+  text-decoration: none;
+  color: #2c3e50;
 }
 </style>
