@@ -5,6 +5,7 @@
         <img :src="makeImagePath(product)" alt class="flex-col--2">
         <div class="flex-col--2">
           <h2>{{ product.name }}</h2>
+          <button @click="addToCart" class="btn btn--grey">Add to Cart</button>
           <p>Price: ${{ product.price }}</p>
           <p v-if="typeof product.size === 'string'">Size: {{ product.size }}</p>
           <div v-if="typeof product.size === 'object'">
@@ -39,6 +40,11 @@ export default {
     return {
       product: this.$store.getters.product(this.$route.params.id)
     };
+  },
+  methods: {
+    addToCart() {
+      this.$store.dispatch("addToCart", this.$route.params.id);
+    }
   }
 };
 </script>
@@ -55,5 +61,25 @@ export default {
 
 li {
   line-height: 150%;
+}
+
+.btn {
+  padding: 0.5rem 0.75rem;
+  border-radius: 3px;
+  border: none;
+  background-color: transparent;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn--grey {
+  background-color: #2c3e50;
+  color: #fff;
+  &:hover,
+  &:focus {
+    background-color: #42b983;
+  }
 }
 </style>
