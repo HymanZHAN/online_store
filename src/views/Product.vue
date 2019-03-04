@@ -79,7 +79,13 @@ li {
   color: #fff;
   &:hover,
   &:focus {
-    background-color: #42b983;
+    &:not([disabled]) {
+      background-color: #42b983;
+      cursor:pointer;
+    }
+    &:disabled {
+      cursor: default;
+    }
   }
 }
 </style>

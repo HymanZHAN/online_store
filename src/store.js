@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    cart: [53363],
+    cart: [],
     products: [
       {
         name: "Crewneck T-Shirt",
@@ -115,9 +115,18 @@ export default new Vuex.Store({
       return state.products.filter(p => p.id === Number(id))[0];
     },
     cartItems: state => {
-      return state.cart.map(itemId =>
+      let uniqCart = Array.from(new Set(state.cart));
+      return uniqCart.map(itemId =>
         state.products.find(product => product.id === itemId)
       );
+    },
+    itemCount: state => {
+      let counts = {};
+      for (let index = 0; index < state.cart.length; index++) {
+        const element = state.cart[index];
+        counts[element] = (counts[element] || 0) + 1;
+      }
+      return counts;
     }
   }
 });
