@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <div id="nav" class="wrapper flex-col flex-col--align-center">
-      <h1 class="flex-col--2">MyStore</h1>
+      <h1 class="flex-col--2">
+        <router-link to="/" class="store-name">MyStore</router-link>
+      </h1>
       <div class="flex-col--2 nav-items">
         <router-link to="/" class="nav-items__item">Home</router-link>
         <router-link to="/cart" class="nav-items__item">Cart
@@ -42,6 +44,9 @@ export default {
     color: #2c3e50;
     &.router-link-exact-active {
       color: #42b983;
+      &.store-name {
+        color: #2c3e50;
+      }
     }
   }
 }

@@ -111,7 +111,7 @@ export default {
     itemsSubtotal() {
       return this.cartItems.reduce((total, item) => {
         return total + item.price * this.itemCount[item.id];
-      }, 0);
+      }, 0).toFixed(2);
     },
     salesTaxPercentage() {
       return `${this.salesTax * 100}%`;
@@ -124,7 +124,7 @@ export default {
     },
     subtotal() {
       if (this.selectedShippingOption) {
-        return Number(this.itemsSubtotal) + Number(this.selectedShippingOption);
+        return (Number(this.itemsSubtotal) + Number(this.selectedShippingOption)).toFixed(2);
       }
       return "---";
     },
