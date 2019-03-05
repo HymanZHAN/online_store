@@ -60,7 +60,7 @@
           :disabled="!this.selectedShippingOption"
           class="btn btn--grey total-section__checkout-button"
         >
-          <span v-if="!this.selectedShippingOption">Shipping option missing...</span>
+          <span v-if="!this.selectedShippingOption">Choose a shipping option...</span>
           <span v-if="this.selectedShippingOption">Check out</span>
         </button>
       </section>
