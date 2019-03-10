@@ -183,8 +183,9 @@ export default {
   }
 }
 .thumbnail {
-  max-width: 50px;
-  margin-top: 0.5rem;
+  max-width: 6rem;
+  margin: 0.5rem;
+  padding-top: 0.5rem;
 }
 .total-section {
   background: #fafafa;
