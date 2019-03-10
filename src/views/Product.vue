@@ -10,8 +10,13 @@
           <p v-if="typeof product.size === 'string'">Size: {{ product.size }}</p>
           <div v-if="typeof product.size === 'object'">
             <p>Size:</p>
-            <p class="sub-item">&nbsp;&nbsp;Waist: {{product.size.waist}}</p>
-            <p class="sub-item">&nbsp;&nbsp;Length: {{product.size.length}}</p>
+            <p
+              class="sub-item"
+              v-for="(value, key, index) in product.size"
+              v-bind:item="value"
+              v-bind:index="index"
+              v-bind:key="value.id"
+            >&nbsp;&nbsp;{{key}}: {{value}}</p>
           </div>
           <p>Color: {{ product.color }}</p>
           <p>
@@ -81,11 +86,15 @@ li {
   &:focus {
     &:not([disabled]) {
       background-color: #42b983;
-      cursor:pointer;
+      cursor: pointer;
     }
     &:disabled {
       cursor: default;
     }
   }
+}
+
+img {
+  margin: 25px;
 }
 </style>

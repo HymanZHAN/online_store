@@ -250,6 +250,15 @@ export default new Vuex.Store({
         counts[element] = (counts[element] || 0) + 1;
       }
       return counts;
+    },
+    featuredProducts: state => {
+      return state.products.filter(p => p.featured);
+    },
+    productsByGender: state => gender => {
+      return state.products.filter(p => p.gender === gender);
+    },
+    productsByCategory: state => category => {
+      return state.products.filter(p => p.category === category);
     }
   }
 });

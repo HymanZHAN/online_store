@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <h1>Cart</h1>
+    <h2>Cart</h2>
     <h3 v-if="totalCount===0">Your shopping cart is empty...
       <router-link to="/" id="store-link">Explore our store!</router-link>
     </h3>
@@ -12,7 +12,7 @@
             <img :src="makeImagePath(item)" class="thumbnail" alt>
           </router-link>
           <div class="flex-col cart-list__item__details">
-            <div>
+            <div class="product-summary">
               <p>{{ item.name }}</p>
               <p v-if="typeof item.size !== 'object'">Size: {{ item.size }}</p>
               <div v-if="typeof item.size === 'object'">
@@ -22,7 +22,7 @@
               </div>
               <p>Color: {{ item.color }}</p>
             </div>
-            <div>
+            <div class="price-and-quantity">
               <p>${{ item.price }}</p>
               <p>Quantity: {{ itemCount[item.id] }}</p>
             </div>
@@ -168,6 +168,13 @@ export default {
   flex: 2;
   justify-content: space-between;
   margin-left: 2rem;
+}
+.product-summary {
+  width: 10rem;
+}
+.price-and-quantity {
+  width: 5rem;
+  float: right;
 }
 .cart-list__btn-remove {
   margin-top: 0.5rem;
