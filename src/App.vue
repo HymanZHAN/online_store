@@ -37,6 +37,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+
 #nav {
   padding: 30px;
   a {
@@ -50,16 +51,24 @@ export default {
     }
   }
 }
+
 .nav-items {
   justify-content: flex-end;
   display: flex;
 }
+
 .nav-items__item {
   margin-left: 1rem;
   position: relative;
 }
+
 ul {
   padding-left: 0;
   list-style: none;
+}
+
+.sub-item {
+  font-size: 0.85rem;
+  line-height: 10px;
 }
 </style>

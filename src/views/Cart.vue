@@ -14,7 +14,12 @@
           <div class="flex-col cart-list__item__details">
             <div>
               <p>{{ item.name }}</p>
-              <p>Size: {{ item.size }}</p>
+              <p v-if="typeof item.size !== 'object'">Size: {{ item.size }}</p>
+              <div v-if="typeof item.size === 'object'">
+                <p>Size:</p>
+                <p class="sub-item">&nbsp;&nbsp;Waist: {{item.size.waist}}</p>
+                <p class="sub-item">&nbsp;&nbsp;Length: {{item.size.length}}</p>
+              </div>
               <p>Color: {{ item.color }}</p>
             </div>
             <div>
@@ -109,9 +114,11 @@ export default {
       return this.$store.state.cart.length;
     },
     itemsSubtotal() {
-      return this.cartItems.reduce((total, item) => {
-        return total + item.price * this.itemCount[item.id];
-      }, 0).toFixed(2);
+      return this.cartItems
+        .reduce((total, item) => {
+          return total + item.price * this.itemCount[item.id];
+        }, 0)
+        .toFixed(2);
     },
     salesTaxPercentage() {
       return `${this.salesTax * 100}%`;
@@ -124,7 +131,9 @@ export default {
     },
     subtotal() {
       if (this.selectedShippingOption) {
-        return (Number(this.itemsSubtotal) + Number(this.selectedShippingOption)).toFixed(2);
+        return (
+          Number(this.itemsSubtotal) + Number(this.selectedShippingOption)
+        ).toFixed(2);
       }
       return "---";
     },

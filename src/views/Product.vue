@@ -10,8 +10,8 @@
           <p v-if="typeof product.size === 'string'">Size: {{ product.size }}</p>
           <div v-if="typeof product.size === 'object'">
             <p>Size:</p>
-            <p>&nbsp;&nbsp;Waist: {{product.size.waist}}</p>
-            <p>&nbsp;&nbsp;Length: {{product.size.length}}</p>
+            <p class="sub-item">&nbsp;&nbsp;Waist: {{product.size.waist}}</p>
+            <p class="sub-item">&nbsp;&nbsp;Length: {{product.size.length}}</p>
           </div>
           <p>Color: {{ product.color }}</p>
           <p>
