@@ -23,7 +23,7 @@ export default {
   mixins: [imagePath],
   computed: {
     gender() {
-      return this.$route.params.gender;
+      return this.$route.meta.gender;
     },
     pageTitle() {
       return this.gender;

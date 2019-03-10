@@ -14,31 +14,50 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: Home
+      component: Home,
+      meta: {
+        position: 1,
+        depth: 1,
+        transitionName: "slide"
+      }
     },
     {
       path: "/products/:id",
       name: "product",
-      component: Product
-    },
-    {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
+      component: Product,
+      meta: { depth: 2, transitionName: "zoom" }
     },
     {
       path: "/cart",
       name: "cart",
-      component: Cart
+      component: Cart,
+      meta: {
+        position: 4,
+        depth: 1,
+        transitionName: "slide"
+      }
     },
     {
-      path: "/:gender/",
-      name: "gender-overview",
-      component: GenderOverview
+      path: "/men",
+      name: "men-overview",
+      component: GenderOverview,
+      meta: {
+        gender: "men",
+        position: 3,
+        depth: 1,
+        transitionName: "slide"
+      }
+    },
+    {
+      path: "/women",
+      name: "women-overview",
+      component: GenderOverview,
+      meta: {
+        gender: "women",
+        position: 2,
+        depth: 1,
+        transitionName: "slide"
+      }
     }
   ]
 });

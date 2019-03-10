@@ -6,29 +6,26 @@
       </h1>
       <div class="flex-col--2 nav-items">
         <router-link to="/" class="nav-items__item">Home</router-link>
-        <router-link
-          :to="{ name: 'gender-overview', params: { gender: 'women'}}"
-          class="nav-items__item"
-        >Women</router-link>
-        <router-link
-          :to="{ name: 'gender-overview', params: { gender: 'men'}}"
-          class="nav-items__item"
-        >Men</router-link>
+        <router-link :to="{ name: 'women-overview'}" class="nav-items__item">Women</router-link>
+        <router-link :to="{ name: 'men-overview'}" class="nav-items__item">Men</router-link>
         <router-link to="/cart" class="nav-items__item">Cart
           <counter-badge :count="cartCount"></counter-badge>
         </router-link>
       </div>
     </div>
-    <router-view/>
+    <transition-page>
+      <router-view/>
+    </transition-page>
   </div>
 </template>
 
 <script>
 import CounterBadge from "@/components/CounterBadge";
+import TransitionPage from "@/components/TransitionPage";
 
 export default {
   name: "app",
-  components: { CounterBadge },
+  components: { CounterBadge, TransitionPage },
   computed: {
     cartCount() {
       return this.$store.state.cart.length;
