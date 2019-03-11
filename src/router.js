@@ -3,7 +3,8 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Product from "./views/Product.vue";
 import Cart from "./views/Cart.vue";
-import GenderOverview from "./views/GenderOverview.vue";
+import MenOverview from "./views/MenOverview.vue";
+import WomenOverview from "./views/WomenOverview.vue";
 
 Vue.use(Router);
 
@@ -17,7 +18,6 @@ export default new Router({
       component: Home,
       meta: {
         position: 1,
-        depth: 1,
         transitionName: "slide"
       }
     },
@@ -33,17 +33,24 @@ export default new Router({
       component: Cart,
       meta: {
         position: 4,
-        depth: 1,
         transitionName: "slide"
       }
     },
     {
-      path: "/:gender",
-      name: "gender-overview",
-      component: GenderOverview,
+      path: "/women",
+      name: "women-overview",
+      component: WomenOverview,
       meta: {
-        position: { women: 2, men: 3 },
-        depth: 1,
+        position: 2,
+        transitionName: "slide"
+      }
+    },
+    {
+      path: "/men",
+      name: "men-overview",
+      component: MenOverview,
+      meta: {
+        position: 3,
         transitionName: "slide"
       }
     }

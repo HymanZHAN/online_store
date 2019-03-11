@@ -3,7 +3,7 @@
     <h2>{{pageTitle | capitalize }}</h2>
     <ul class="wrapper item-grid">
       <li v-for="product in productsByGender" :key="product.id" class="item-grid__item">
-        <router-link :to="{ name: 'product', params: { id: product.id}}">
+        <router-link :to="{ name: 'product', params: { id: product.id }}">
           <img class="product-image" :src="makeImagePath(product)" alt>
           <p class="product-title">{{ product.name }}</p>
           <p>
@@ -19,15 +19,15 @@
 import { imagePath } from "@/mixins/imagePath.js";
 
 export default {
-  name: "genderOverview",
+  name: "menOverview",
   mixins: [imagePath],
+  data() {
+    return {
+      gender: "men",
+      pageTitle: this.gender
+    };
+  },
   computed: {
-    gender() {
-      return this.$route.params.gender;
-    },
-    pageTitle() {
-      return this.gender;
-    },
     productsByGender() {
       return this.$store.getters.productsByGender(this.gender);
     }

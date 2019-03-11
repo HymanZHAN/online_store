@@ -105,7 +105,7 @@ img {
   position: fixed;
   top: 10rem;
   right: 20rem;
-  bottom: 15rem;
+  bottom: 0;
   left: 20rem;
   overflow: hidden;
   background: #fff;

@@ -3,6 +3,7 @@
     :name="transitionName"
     :mode="transitionMode"
     :enter-active-class="transitionEnterActiveClass"
+    :leave-active-class="transitionLeaveActiveClass"
     @beforeLeave="beforeLeave"
     @enter="enter"
     @afterEnter="afterEnter"
@@ -22,17 +23,21 @@ export default {
       prevHeight: 0,
       transitionName: DEFAULT_TRANSITION,
       transitionMode: DEFAULT_TRANSITION_MODE,
-      transitionEnterActiveClass: ""
+      transitionEnterActiveClass: "",
+      transitionLeaveActiveClass: ""
     };
   },
   created() {
-    this.$router.beforeEach((to, from, next) => {
-      let transitionName =
-        to.meta.transitionName ||
-        from.meta.transitionName ||
-        DEFAULT_TRANSITION;
+    this.$router.beforeEach((to, from, next) =>
+      this.setTransition(to, from, next)
+    );
+  },
+  methods: {
+    setTransition(to, from, next) {
+      let toTransitionName = to.meta.transitionName;
+      let fromTransitionName = from.meta.transitionName;
 
-      if (transitionName === "slide") {
+      if (toTransitionName === "slide" && fromTransitionName === "slide") {
         let toPosition = to.meta.position;
         let fromPosition = from.meta.position;
         if (toPosition instanceof Object) {
@@ -41,31 +46,28 @@ export default {
         if (fromPosition instanceof Object) {
           fromPosition = fromPosition[from.params.gender];
         }
-        transitionName =
+        this.transitionName =
           toPosition < fromPosition ? "slide-right" : "slide-left";
+        this.transitionEnterActiveClass = `${this.transitionName}-enter-active`;
+        this.transitionLeaveActiveClass = `${this.transitionName}-leave-active`;
       }
 
-      this.transitionMode = DEFAULT_TRANSITION_MODE;
-      this.transitionEnterActiveClass = `${transitionName}-enter-active`;
-
       if (to.meta.transitionName === "zoom") {
-        this.transitionMode = "out-in";
         this.transitionEnterActiveClass = "zoom-enter-active";
+        this.transitionLeaveActiveClass = "fade-leave-active";
         document.body.style.overflow = "hidden";
+        this.transitionName = "zoom";
       }
 
       if (from.meta.transitionName === "zoom") {
-        this.transitionMode = "null";
-        this.transitionEnterActiveClass = null;
+        this.transitionLeaveActiveClass = "zoom-leave-active";
+        this.transitionEnterActiveClass = "fade-enter-active";
         document.body.style.overflow = null;
+        this.transitionName = "zoom";
       }
 
-      this.transitionName = transitionName;
-
       next();
-    });
-  },
-  methods: {
+    },
     beforeLeave(element) {
       this.prevHeight = getComputedStyle(element).height;
     },
@@ -88,7 +90,7 @@ export default {
 <style lang="scss">
 .fade-enter-active,
 .fade-leave-active {
-  transition-duration: 0.3s;
+  transition-duration: 0.1s;
   transition-property: height, opacity;
   transition-timing-function: ease;
   overflow: hidden;
@@ -135,7 +137,7 @@ export default {
 @keyframes zoom {
   from {
     opacity: 0;
-    transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.5, 0.5, 0.5);
   }
 
   100% {
