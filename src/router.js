@@ -38,23 +38,11 @@ export default new Router({
       }
     },
     {
-      path: "/men",
-      name: "men-overview",
+      path: "/:gender",
+      name: "gender-overview",
       component: GenderOverview,
       meta: {
-        gender: "men",
-        position: 3,
-        depth: 1,
-        transitionName: "slide"
-      }
-    },
-    {
-      path: "/women",
-      name: "women-overview",
-      component: GenderOverview,
-      meta: {
-        gender: "women",
-        position: 2,
+        position: { women: 2, men: 3 },
         depth: 1,
         transitionName: "slide"
       }
