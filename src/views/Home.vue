@@ -5,7 +5,7 @@
       <ul class="featured-items">
         <li v-for="product in featuredProducts" :key="product.id" class="featured-items__item">
           <router-link :to="{ name: 'product', params: { id: product.id }}">
-            <img class="product-image" :src="imagePath(product)" alt>
+            <img class="product-image" :src="imagePath(product)" alt="product-image">
             <p class="product-title">{{ product.name }}</p>
             <p>
               <em>${{ product.price }}</em>

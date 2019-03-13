@@ -237,10 +237,10 @@ export default new Vuex.Store({
     product: state => id => {
       return state.products.filter(p => p.id === Number(id))[0];
     },
-    cartItems: state => {
-      let uniqCart = Array.from(new Set(state.cart));
+    cartItems: (state, getters) => {
+      let uniqCart = Object.keys(getters.itemCount);
       return uniqCart.map(itemId =>
-        state.products.find(product => product.id === itemId)
+        state.products.find(p => p.id === Number(itemId))
       );
     },
     itemCount: state => {
