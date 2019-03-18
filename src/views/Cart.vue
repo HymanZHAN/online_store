@@ -26,9 +26,17 @@
               <p>${{ item.price }}</p>
               <p>Quantity:</p>
               <div>
-                <button class="minus-btn" @click="removeOneFromCart(item.id)">-</button>
+                <button
+                  class="minus-btn"
+                  @click="removeOneFromCart(item.id)"
+                  v-bind:disabled="!isQuantMoreThanOne(item.id)"
+                >-</button>
                 {{ itemCount[item.id] }}
-                <button class="plus-btn" @click="addOneToCart(item.id)">+</button>
+                <button
+                  class="plus-btn"
+                  @click="addOneToCart(item.id)"
+                  v-bind:disabled="isInventoryEmpty(item.id)"
+                >+</button>
               </div>
             </div>
             <button @click="removeAllFromCart(item.id)" class="btn cart-list__btn-remove">Remove</button>
@@ -160,7 +168,13 @@ export default {
       });
     },
     addOneToCart(itemId) {
-      this.$store.dispatch("addToCart", itemId)
+      this.$store.dispatch("addToCart", itemId);
+    },
+    isQuantMoreThanOne(itemId) {
+      return this.itemCount[itemId] > 1;
+    },
+    isInventoryEmpty(itemId) {
+      return this.$store.getters.product(itemId).quantity === 0;
     }
   }
 };
@@ -201,11 +215,18 @@ export default {
   display: inline-block;
   font-size: 12px;
   margin: 2px 2px;
-  padding: 3px 4px;
+  padding: 5px 5px;
   border-radius: 2px;
   cursor: pointer;
   &:hover {
     background-color: #42b983;
+  }
+  &:disabled {
+    cursor: default;
+    color: gray;
+    &:hover {
+      background-color: #2c3e50;
+    }
   }
 }
 .cart-list__btn-remove {
