@@ -24,9 +24,14 @@
             </div>
             <div class="price-and-quantity">
               <p>${{ item.price }}</p>
-              <p>Quantity: {{ itemCount[item.id] }}</p>
+              <p>Quantity:</p>
+              <div>
+                <button class="minus-btn" @click="removeOneFromCart(item.id)">-</button>
+                {{ itemCount[item.id] }}
+                <button class="plus-btn" @click="addOneToCart(item.id)">+</button>
+              </div>
             </div>
-            <button @click="removeFromCart(item.id)" class="btn cart-list__btn-remove">Remove</button>
+            <button @click="removeAllFromCart(item.id)" class="btn cart-list__btn-remove">Remove</button>
           </div>
         </li>
       </ul>
@@ -145,8 +150,17 @@ export default {
     }
   },
   methods: {
-    removeFromCart(itemId) {
-      this.$store.dispatch("removeFromCart", itemId);
+    removeOneFromCart(itemId) {
+      this.$store.dispatch("removeOneFromCart", itemId);
+    },
+    removeAllFromCart(itemId) {
+      this.$store.dispatch("removeAllFromCart", {
+        itemId: itemId,
+        itemCount: this.itemCount[itemId]
+      });
+    },
+    addOneToCart(itemId) {
+      this.$store.dispatch("addToCart", itemId)
     }
   }
 };
@@ -175,6 +189,24 @@ export default {
 .price-and-quantity {
   width: 5rem;
   float: right;
+}
+.minus-btn,
+.plus-btn {
+  background-color: #2c3e50;
+  border: none;
+  color: white;
+  font-family: Consolas;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 2px 2px;
+  padding: 3px 4px;
+  border-radius: 2px;
+  cursor: pointer;
+  &:hover {
+    background-color: #42b983;
+  }
 }
 .cart-list__btn-remove {
   margin-top: 0.5rem;
